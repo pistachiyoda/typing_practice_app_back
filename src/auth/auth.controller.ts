@@ -1,8 +1,9 @@
-import { Body, Controller, Post, Req } from '@nestjs/common';
+import { Body, Controller, Post, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from '../dto/auth.dto';
 import { UseGuards } from '@nestjs/common';
 import { LocalAuthGuard } from './local-auth.guard';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -17,7 +18,17 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   // Promiseの型あとで修正
-  login(@Body() dto: AuthDto, @Req() req): Promise<any> {
-    return this.authService.login(dto);
+  async login(
+    @Body() dto: AuthDto,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<any> {
+    const jwt = await this.authService.login(dto);
+    res.cookie('jwt_token', jwt, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      path: '/',
+    });
+    return 'success';
   }
 }

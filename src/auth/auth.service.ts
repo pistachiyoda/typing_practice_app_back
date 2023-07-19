@@ -43,8 +43,6 @@ export class AuthService {
   async login(dto: AuthDto): Promise<any> {
     // payloadに含めるべき情報を考える
     const payload = { email: dto.email };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    return this.jwtService.sign(payload);
   }
 }
