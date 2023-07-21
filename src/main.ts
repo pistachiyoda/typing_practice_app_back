@@ -18,7 +18,7 @@ async function bootstrap() {
     credentials: true,
     origin: 'https://localhost:3001', // フロントエンドをデプロイした後、そのURLに変更する
   });
-  await app.listen(3005);
   app.use(cookieParser());
+  await app.listen(3005);
 }
 bootstrap();
