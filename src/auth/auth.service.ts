@@ -45,4 +45,8 @@ export class AuthService {
     const payload = { email: dto.email };
     return this.jwtService.sign(payload);
   }
+
+  async logout(dto: AuthDto): Promise<any> {
+    return 'logout';
+  }
 }
