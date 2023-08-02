@@ -16,4 +16,17 @@ model User {
   updatedAt DateTime @updatedAt
   email String @unique
   hashedPassword String
+	// Prismaでは、リレーションシップを定義する際に両方のモデルで相互関係を持たせる必要がある
+	lessonResult LessonResult[]
+}
+
+model LessonResult {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+	userId Int
+	user User @relation(fields: [userId], references: [id])
+	lessonNo Int
+	missCount Int
+	time Float
+	speed Float
 }
