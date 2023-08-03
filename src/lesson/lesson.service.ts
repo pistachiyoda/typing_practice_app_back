@@ -26,4 +26,16 @@ export class LessonService {
       },
     });
   }
+
+  //
+  async getResult(email: string, lessonNo: number) {
+    const user = await this.prisma.user.findUnique({
+      where: { email: email },
+    });
+    const lessonResults = await this.prisma.lessonResult.findMany({
+      where: { userId: user.id, lessonNo: lessonNo },
+    });
+    console.log(lessonResults);
+    return lessonResults;
+  }
 }
