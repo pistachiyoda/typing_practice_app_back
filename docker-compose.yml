@@ -1,17 +1,11 @@
 version: '3.8'
 services:
-  dev-mysql:
-    image: mysql:8.0
-    ports:
-      - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: database
-      MYSQL_USER: pista
-      MYSQL_PASSWORD: password
+  postgres:
+    image: postgres
     restart: always
-    networks:
-      - dev-network
-
-networks:
-  dev-network:
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
