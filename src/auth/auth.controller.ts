@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Post, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from '../dto/auth.dto';
 import { UseGuards } from '@nestjs/common';
@@ -14,6 +14,12 @@ export class AuthController {
   // Promiseの型あとで修正
   signUp(@Body() dto: AuthDto): Promise<any> {
     return this.authService.signUp(dto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('delete')
+  deleteUser(@Req() req): Promise<any> {
+    return this.authService.deleteUser(req.email);
   }
 
   @UseGuards(LocalAuthGuard)

@@ -30,6 +30,18 @@ export class AuthService {
     }
   }
 
+  async deleteUser(email: string): Promise<any> {
+    try {
+      await this.prisma.user.delete({
+        where: {
+          email: email,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.usersService.findOne(email);
     const isValid = await bcrypt.compare(password, user.hashedPassword);

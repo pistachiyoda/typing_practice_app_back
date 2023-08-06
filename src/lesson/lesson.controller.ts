@@ -11,7 +11,7 @@ export class LessonController {
     return this.lessonService.postResult({ ...req.body, ...req.user });
   }
 
-  @Get(':id') //
+  @Get(':id')
   getResult(@Req() req, @Param('id') id: number) {
     return this.lessonService.getResult(req.user.email, Number(id));
   }
