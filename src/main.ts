@@ -16,9 +16,13 @@ async function bootstrap() {
   });
   app.enableCors({
     credentials: true,
-    origin: 'https://localhost:3001', // フロントエンドをデプロイした後、そのURLに変更する
+    origin: [
+      'https://localhost:3001', // フロントエンドをデプロイした後、そのURLに変更する
+      'https://typing-practice-app-front.vercel.app/',
+    ],
   });
   app.use(cookieParser());
-  await app.listen(3005);
+  const port = process.env.PORT || 3005;
+  await app.listen(port, '0.0.0.0');
 }
 bootstrap();
