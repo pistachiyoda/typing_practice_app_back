@@ -18,7 +18,7 @@ async function bootstrap() {
     credentials: true,
     origin: [
       'https://localhost:3001', // フロントエンドをデプロイした後、そのURLに変更する
-      'https://typing-practice-app-front.vercel.app/',
+      'https://typing-practice-app-front.vercel.app',
     ],
   });
   app.use(cookieParser());
