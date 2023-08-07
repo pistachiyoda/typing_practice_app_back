@@ -5,14 +5,14 @@ import * as fs from 'fs';
 
 async function bootstrap() {
   // デプロイ後、デプロイ環境に合わせてhttpsOptionsを変更する(削除？)
-  const httpsOptions = {
-    key: fs.readFileSync('localhost-key.pem'),
-    cert: fs.readFileSync('localhost.pem'),
-  };
+  // const httpsOptions = {
+  //   key: fs.readFileSync('localhost-key.pem'),
+  //   cert: fs.readFileSync('localhost.pem'),
+  // };
 
   const app = await NestFactory.create(AppModule, {
     logger: ['log'],
-    httpsOptions,
+    // httpsOptions,
   });
   app.enableCors({
     credentials: true,
